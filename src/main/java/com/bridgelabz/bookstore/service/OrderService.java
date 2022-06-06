@@ -54,7 +54,7 @@ public class OrderService implements IOrderService
                 String token = util.createToken(newOrder.getOrderID());
                 mailService.sendEmail(newOrder.getUserID().getEmail(), "Test Email", "Registered SuccessFully, hii: "
                         + newOrder.getOrderID() + "Please Click here to get data-> "
-                        + "http://localhost:8098/order/insert/" + token);
+                        + "http://localhost:8090/order/insert/" + token);
                 log.info("Order record inserted successfully");
                 return token;
             } else {
@@ -76,9 +76,9 @@ public class OrderService implements IOrderService
         if (order.isPresent()) {
             List<Order> listOrder = orderRepo.findAll();
             log.info("Order record retrieved successfully for id " + id);
-            mailService.sendEmail("priya.sports123@gmail.com", "Test Email", "Get your data with this token, hii: "
+            mailService.sendEmail("vishakakadam19@gmail.com", "Test Email", "Get your data with this token, hii: "
                     + order.get().getUserID().getEmail() + "Please Click here to get all data-> "
-                    + "http://localhost:8098/order/getById/" + token);
+                    + "http://localhost:8090/order/getById/" + token);
             return listOrder;
 
         } else {
@@ -97,9 +97,9 @@ public class OrderService implements IOrderService
         if (orderData.isPresent()) {
             List<Order> listOrderData = orderRepo.findAll();
             log.info("ALL order records retrieved successfully");
-            mailService.sendEmail("priya.sports123@gmail.com", "Test Email", "Get your data with this token, hii: "
+            mailService.sendEmail("vishakakadam19@gmail.com", "Test Email", "Get your data with this token, hii: "
                     + orderData.get().getUserID().getEmail() + "Please Click here to get all data-> "
-                    + "http://localhost:8098/order/getAllOrders/" + token);
+                    + "http://localhost:8090/order/getAllOrders/" + token);
             return listOrderData;
         } else {
             System.out.println("Exception ...Token not found!");
@@ -121,7 +121,7 @@ public class OrderService implements IOrderService
             orderRepo.save(order.get());
             mailService.sendEmail(order.get().getUserID().getEmail(), "Test Email", "canceled order SuccessFully, hii: "
                     +order.get().getOrderID()+"Please Click here to get data of updated id-> "
-                    +"http://localhost:8098/order/cancelOrder/"+token);
+                    +"http://localhost:8090/order/cancelOrder/"+token);
             return order.get();
         } else {
             throw new BookStoreException("Order Record doesn't exists");
